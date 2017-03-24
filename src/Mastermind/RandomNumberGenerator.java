@@ -25,6 +25,8 @@ public class RandomNumberGenerator {
 	public void setCorrectAnswer(int[] correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
+	
+	
 
 }
 

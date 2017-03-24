@@ -12,7 +12,7 @@ public class PossiblyArrays {
 	public int[][] array3 = new int[2000][4];
 	public int[][] array4 = new int[2000][4];
 	public int[][] array5 = new int[2000][4];
-
+	
 	PossiblyArrays(){
 		fillArrays();
 	}
