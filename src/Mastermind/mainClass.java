@@ -1,5 +1,6 @@
 package Mastermind;
 
+import java.util.Vector;
 
 public class mainClass {
 
@@ -11,34 +12,53 @@ public class mainClass {
 	static int[] myGuess = new int[4];
 	static int[] valueArray = new int[10];
 	static int[] positionArray = new int[10];
-	 
+	
+	
+	static int guessW = 0;
+	static int guessC = 0;
+	
 	public static void main(String[] args) {
 
-		//Testing();
-		/*
-		correctAnswer[0] = 7;
-		correctAnswer[1] = 0;
-		correctAnswer[2] = 8;
-		correctAnswer[3] = 5;
-		*/
 		for(int i = 0; i < 4; i++){
 			valueArray[correctAnswer[i]]++;
 		}
 		
 		
 		
-		//while(!result){
-				//Generate Guess
-				//Generate Result 
-				//Eliminate Possibly Choices
-				
-				generateGuess();
-				
-				getResult();
-				
-				//eliminator();
+		while(!result){
+
+			if(firstTry){
+				firstTry = false;
+				myGuess[0] = 1;
+				myGuess[1] = 1;
+				myGuess[2] = 2;
+				myGuess[3] = 2;
+			}
+			
+
+			for(int i = 0;  i < 4 ; i++){
+				System.out.print(myGuess[i]);
+			}
+			
+			System.out.println();
+			
+			int [] guessArray  = getResult(myGuess);
 		
-		//}
+			guessC = guessArray[0];
+			guessW = guessArray[1];
+			
+			
+			
+			if(guessC == 4){
+				return;
+			}
+				
+			eliminator();
+			
+			
+			
+		
+		}
 			
 	}
 		
@@ -61,23 +81,31 @@ public class mainClass {
 		
 	}
 	
-	public static void generateGuess(){
-			
-		if(firstTry){
-			firstTry = false;
-			myGuess[0] = 1;
-			myGuess[1] = 1;
-			myGuess[2] = 2;
-			myGuess[3] = 2;
+	
+	public static void eliminator(){
+		
+		//Just like the terminator
+		GuessEliminator eliminate1 = new GuessEliminator(1);
+		GuessEliminator eliminate2 = new GuessEliminator(2);
+		GuessEliminator eliminate3 = new GuessEliminator(3);
+		GuessEliminator eliminate4 = new GuessEliminator(4);
+	
+		eliminate1.start();
+		eliminate2.start();
+		eliminate3.start();
+		eliminate4.start();
+		
+		try{
+			eliminate1.join();
 		}
-		
-		
-		
-		
+		catch(InterruptedException ie){
+			ie.printStackTrace();
+			
+		}
 		
 	}
 	
-	public static void  getResult(){
+	public static int[]  getResult(int[] myGuess){
 		
 		int RightValue = 0;
 		int RightPlaceAndValue = 0;
@@ -97,8 +125,13 @@ public class mainClass {
 				valueArray[myGuess[i]]--;
 			}
 		}
+
 		
-		System.out.println("C is: " + RightPlaceAndValue + "W is: " + RightValue);
+		
+		int[] returnArray = new int[2];
+		returnArray[0] = RightPlaceAndValue;
+		returnArray[1] = RightValue;
+		return returnArray;
 	}
 	
 
