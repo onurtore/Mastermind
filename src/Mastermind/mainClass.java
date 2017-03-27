@@ -1,6 +1,5 @@
 package Mastermind;
 
-import java.util.Vector;
 
 public class mainClass {
 
@@ -8,33 +7,37 @@ public class mainClass {
 	static boolean firstTry = true;
 	static RandomNumberGenerator myRNG	= new RandomNumberGenerator();
 	static int[] correctAnswer = myRNG.getCorrectAnswer();
-	static PossiblyArrays myPA	= new PossiblyArrays();
+	final static PossiblyArrays myPA	= new PossiblyArrays();
 	static int[] myGuess = new int[4];
 	static int[] valueArray = new int[10];
 	static int[] positionArray = new int[10];
 	
-	
+	static int[] oldGuess;
 	static int guessW = 0;
 	static int guessC = 0;
 	
 	public static void main(String[] args) {
-
-		for(int i = 0; i < 4; i++){
-			valueArray[correctAnswer[i]]++;
-		}
-		
-		
 		
 		while(!result){
 
+			
 			if(firstTry){
 				firstTry = false;
 				myGuess[0] = 1;
 				myGuess[1] = 1;
 				myGuess[2] = 2;
 				myGuess[3] = 2;
+				myPA.array1[1122][0] = -1;
+			}
+			System.out.print("Right Answer is: ");
+			
+			for(int i = 0;  i < 4 ; i++){
+				System.out.print(correctAnswer[i]);
 			}
 			
+			System.out.println();
+			
+			System.out.print("My Guess is: ");
 
 			for(int i = 0;  i < 4 ; i++){
 				System.out.print(myGuess[i]);
@@ -47,18 +50,17 @@ public class mainClass {
 			guessC = guessArray[0];
 			guessW = guessArray[1];
 			
-			
+			System.out.println("GuessC is: " + guessC + " GuessW is:" + guessW);
 			
 			if(guessC == 4){
 				return;
 			}
+			
 				
+			
 			eliminator();
-			
-			
-			
-		
-		}
+	
+			}
 			
 	}
 		
@@ -67,7 +69,7 @@ public class mainClass {
 	/*
 	 * Testing for our 4 different arrays
 	 */
-	public static void Testing(){
+	public  void Testing(){
 		for(int i = 0 ; i < 4 ; i++){
 			System.out.print(correctAnswer[i] + " ");
 		}
@@ -84,18 +86,20 @@ public class mainClass {
 	
 	public static void eliminator(){
 		
-		//Just like the terminator
-		GuessEliminator eliminate1 = new GuessEliminator(1);
-		GuessEliminator eliminate2 = new GuessEliminator(2);
-		GuessEliminator eliminate3 = new GuessEliminator(3);
-		GuessEliminator eliminate4 = new GuessEliminator(4);
+		GuessEliminator eliminate1 = new GuessEliminator(1,myPA);
+		GuessEliminator eliminate2 = new GuessEliminator(2,myPA);
+		GuessEliminator eliminate3 = new GuessEliminator(3,myPA);
+		GuessEliminator eliminate4 = new GuessEliminator(4,myPA);
 	
-		eliminate1.start();
-		eliminate2.start();
-		eliminate3.start();
-		eliminate4.start();
+		GuessEliminator.isFinish = false;
 		
+		eliminate1.start();
+		//eliminate2.start();
+		//eliminate3.start();
+		//eliminate4.start();
+	
 		try{
+			
 			eliminate1.join();
 		}
 		catch(InterruptedException ie){
@@ -106,6 +110,12 @@ public class mainClass {
 	}
 	
 	public static int[]  getResult(int[] myGuess){
+		
+		valueArray = new int[10];
+		
+		for(int i = 0; i < 4; i++){
+			valueArray[correctAnswer[i]]++;
+		}
 		
 		int RightValue = 0;
 		int RightPlaceAndValue = 0;
