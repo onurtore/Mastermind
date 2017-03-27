@@ -6,7 +6,7 @@ public class GuessEliminator extends Thread {
 
 	int partion;
 	static  boolean isFinish = false;
-	int myGuess[] = new int[4];
+
 	int[][] array1;
 	
 	public GuessEliminator(int partion,PossiblyArrays myPA){
@@ -18,25 +18,60 @@ public class GuessEliminator extends Thread {
 	}
 	
 	//Yanlýþ þeyi kontrol cevap bu olsaydý ne olurdu onu kontrol etmeli 
-	public int[] getResult(int[] array ){
+	public int[] getResult(int[] correctAnswer,int[] myGuess){
+
+		int[] valueArray = new int[10];
+	
 		
+		
+		for(int i = 0; i < 4; i++){
+			valueArray[correctAnswer[i]]++;
+		}
+		
+		int RightValue = 0;
+		int RightPlaceAndValue = 0;
+		
+		//Not O(n^2), O(n)
+		
+		for(int i = 0 ; i < 4 ; i++){
+			
+			if(valueArray[myGuess[i]]  > 0){
+				if(myGuess[i] == correctAnswer[i]){
+					RightPlaceAndValue++;
+				}
+				else{
+					RightValue++;
+				}
+				
+				valueArray[myGuess[i]]--;
+			}
+		}
+
+		
+		
+		int[] returnArray = new int[2];
+		returnArray[0] = RightPlaceAndValue;
+		returnArray[1] = RightValue;
+		return returnArray;
+
 	}
 	
 	public void run(){
+
 		if(partion == 1){
 			for(int i = 0; i < 9999; i++){
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
+				//try {
+					//Thread.sleep(5);
+			//	} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			//		e.printStackTrace();
+				//}
 				if(isFinish){
 					return;
 				}
 				if(array1[i][0] != -1 ){
-					int[] eliminationGuess = getResult(array1[i]);
-					int[] eliminationGuess = mainClass.getResult(mainClass.myPA.array1[i]);
+					int[] eliminationGuess = getResult(array1[i],mainClass.myGuess);
+					
 					if(eliminationGuess[0] != mainClass.guessC || eliminationGuess[1] != mainClass.guessW   ){
 						array1[i][0] = -1;
 					}
