@@ -1,5 +1,6 @@
 package Mastermind;
 
+import java.util.Vector;
 
 public class mainClass {
 
@@ -16,9 +17,12 @@ public class mainClass {
 	static int guessW = 0;
 	static int guessC = 0;
 	
+	static  Vector<int[]> guessVector = new Vector<int[]>();
+	static 	Vector<int[]> guessResult = new Vector<int[]>();
+	
 	public static void main(String[] args) {
 		
-		while(!result){
+		while(true){
 
 			
 			if(firstTry){
@@ -29,6 +33,28 @@ public class mainClass {
 				myGuess[3] = 2;
 				myPA.array1[1122][0] = -1;
 			}
+	/*			System.out.println("\n\n");
+				for(int i = 0; i < guessVector.size(); i++){
+					for(int j = 0; j < 4 ; j++){
+						System.out.print(guessVector.elementAt(i)[j]);
+					}
+					System.out.println();
+				
+				}
+				System.out.println("\n\n");
+				for(int i = 0; i < guessResult.size(); i++){
+					for(int j = 0; j <2 ; j++){
+						System.out.print(guessResult.elementAt(i)[j]);
+					}
+					System.out.println();
+				
+				}
+	*/	
+			
+			int [] numbersClone = (int[])myGuess.clone();
+			guessVector.addElement(numbersClone);//Add old guesses to this vector 
+			
+			
 			System.out.print("Right Answer is: ");
 			
 			for(int i = 0;  i < 4 ; i++){
@@ -36,9 +62,7 @@ public class mainClass {
 			}
 			
 			System.out.println();
-			
 			System.out.print("My Guess is: ");
-
 			for(int i = 0;  i < 4 ; i++){
 				System.out.print(myGuess[i]);
 			}
@@ -49,6 +73,10 @@ public class mainClass {
 		
 			guessC = guessArray[0];
 			guessW = guessArray[1];
+			
+			
+			int [] numbersClone2 = (int[])guessArray.clone();
+			guessResult.addElement(numbersClone2);
 			
 			System.out.println("GuessC is: " + guessC + " GuessW is:" + guessW);
 			
@@ -86,11 +114,7 @@ public class mainClass {
 	
 	public static void eliminator(){
 		
-		GuessEliminator eliminate1 = new GuessEliminator(1,myPA);
-		GuessEliminator eliminate2 = new GuessEliminator(2,myPA);
-		GuessEliminator eliminate3 = new GuessEliminator(3,myPA);
-		GuessEliminator eliminate4 = new GuessEliminator(4,myPA);
-	
+		GuessEliminator eliminate1 = new GuessEliminator();
 		GuessEliminator.isFinish = false;
 		
 		eliminate1.start();
