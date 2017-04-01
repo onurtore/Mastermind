@@ -7,12 +7,8 @@ public class PossiblyArrays {
 	
 	//Different vector for every thread
 	
-	//public int[][] array1 = new int[2000][4];
-	public int[][] array1 = new int[10000][4];
-	public int[][] array2 = new int[2000][4];
-	public int[][] array3 = new int[2000][4];
-	public int[][] array4 = new int[2000][4];
-	public int[][] array5 = new int[2000][4];
+	public int[][] array1 = new int[5000][4];
+	public int[][] array2 = new int[5000][4];
 	
 	PossiblyArrays(){
 		fillArrays();
@@ -21,38 +17,18 @@ public class PossiblyArrays {
 	public void fillArrays(){
 		
 		int counter = 0;
-		/*
-		for(int i = 0 ; i < 2000 ; i++){
-			
-			array1[i] = intToDigits(counter);
-			++counter;
-		}*/
-		for(int i = 0; i < 9999 ; i++){
+
+		for(int i = 0; i < 5000 ; i++){
 			array1[i] = intToDigits(counter);
 			++counter;
 		}
-		counter = 0;
-		for(int i = 0 ; i < 2000 ; i++){
-				
+		
+
+		for(int i = 0; i < 5000 ; i++){
 			array2[i] = intToDigits(counter);
 			++counter;
 		}
-		for(int i = 0 ; i < 2000 ; i++){
-				
-			array3[i] = intToDigits(counter);
-			++counter;
-		}
-		for(int i = 0 ; i < 2000 ; i++){
-				
-			array4[i] = intToDigits(counter);
-			++counter;
-		}
-		for(int i = 0 ; i < 2000 ; i++){
-				
-			array5[i] = intToDigits(counter);
-			++counter;
-		}
-
+		return;
 		
 		
 	}
@@ -80,11 +56,7 @@ public class PossiblyArrays {
 		    --digitCount;
 		}
 		
-		return digitArray;
-		
-		
-		
-		
+		return digitArray;		
 	}
 	
 

@@ -89,7 +89,7 @@ public class mainClass {
 			
 			eliminator();
 	
-			}
+		}
 			
 	}
 		
@@ -105,7 +105,7 @@ public class mainClass {
 		
 		for(int i = 0; i < 2000; i++){
 			for(int j = 0; j < 4; j++){
-				System.out.print(myPA.array5[i][j]);
+				System.out.print(myPA.array1[i][j]);
 			}
 			System.out.println();
 		}
@@ -115,21 +115,26 @@ public class mainClass {
 	
 	public static void eliminator(){
 		
-		GuessEliminator eliminate1 = new GuessEliminator();
+		GuessEliminator eliminate1 = new GuessEliminator(myPA.array1);
+		GuessEliminator eliminate2 = new GuessEliminator(myPA.array2);
+
 		GuessEliminator.isFinish = false;
-		
-		eliminate1.start();
-		//eliminate2.start();
-		//eliminate3.start();
-		//eliminate4.start();
 	
-		try{
-			
+		eliminate1.start();
+		eliminate2.start();
+	
+	
+		try {
 			eliminate1.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch(InterruptedException ie){
-			ie.printStackTrace();
-			
+		try {
+			eliminate2.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

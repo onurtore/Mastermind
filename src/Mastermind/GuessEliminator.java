@@ -1,13 +1,19 @@
 package Mastermind;
 
-import java.util.Random;
 
 public class GuessEliminator extends Thread {
 
-	int partion;
+	int[][] myArray;
 	static  boolean isFinish = false;
 
 		
+	GuessEliminator(int[][] PaArray){
+		
+		this.myArray = PaArray;
+		
+	}
+	
+	
 	//Yanlýþ þeyi kontrol cevap bu olsaydý ne olurdu onu kontrol etmeli 
 	public boolean getResult(int[] correctAnswer){
 
@@ -45,32 +51,28 @@ public class GuessEliminator extends Thread {
 	}
 	
 	public void run(){
-
-			for(int i = 0; i < 9999; i++){
-				//try {
-				//	Thread.sleep(5);
-				//} catch (InterruptedException e) {
-					 //TODO Auto-generated catch block
-					// e.printStackTrace();
-				//}
-				if(mainClass.myPA.array1[i][0] != -1 ){
-					if(!getResult(mainClass.myPA.array1[i])  ){
-						mainClass.myPA.array1[i][0] = -1;
-					}
-					else{
-						isFinish = true;	
-						System.arraycopy(mainClass.myPA.array1[i],0,mainClass.myGuess,0,mainClass.myGuess.length);
-						mainClass.myPA.array1[i][0] = -1;
-					}
-				}
+			
+		
+			for(int i = 0; i < 5000; i++){
 				if(isFinish){
 					return;
-				}
-				if(i == 9999){
-									
+				}	
+				if(myArray[i][0] != -1 ){
+						if(!getResult(myArray[i])  ){
+							myArray[i][0] = -1;
+						}
+						else{
+							isFinish = true;	
+							System.arraycopy(myArray[i],0,mainClass.myGuess,0,mainClass.myGuess.length);
+							myArray[i][0] = -1;
+							
+						}
+				}	
+				if(i == 4999){
 					return;
 				}
 			}
+			
 		}
 }	
 
