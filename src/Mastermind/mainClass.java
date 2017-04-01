@@ -21,7 +21,8 @@ public class mainClass {
 	static 	Vector<int[]> guessResult = new Vector<int[]>();
 	
 	public static void main(String[] args) {
-		
+			
+
 		while(true){
 
 			
@@ -138,8 +139,9 @@ public class mainClass {
 		valueArray = new int[10];
 		
 		for(int i = 0; i < 4; i++){
-			valueArray[correctAnswer[i]]++;
+			valueArray[myGuess[i]]++;
 		}
+		
 		
 		int RightValue = 0;
 		int RightPlaceAndValue = 0;
@@ -148,7 +150,7 @@ public class mainClass {
 		
 		for(int i = 0 ; i < 4 ; i++){
 			
-			if(valueArray[myGuess[i]]  > 0){
+			if(valueArray[correctAnswer[i]]  > 0){
 				if(myGuess[i] == correctAnswer[i]){
 					RightPlaceAndValue++;
 				}
@@ -156,7 +158,7 @@ public class mainClass {
 					RightValue++;
 				}
 				
-				valueArray[myGuess[i]]--;
+				valueArray[correctAnswer[i]]--;
 			}
 		}
 

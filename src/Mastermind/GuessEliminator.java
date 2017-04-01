@@ -17,7 +17,7 @@ public class GuessEliminator extends Thread {
 			
 			//reconstruct the correct answer 
 			for(int j = 0; j < 4; j++){
-				valueArray[correctAnswer[j]]++;
+				valueArray[mainClass.guessVector.elementAt(i)[j]]++;
 			}
 			
 			int RightValue = 0; 
@@ -25,7 +25,7 @@ public class GuessEliminator extends Thread {
 			
 			for(int j = 0 ; j < 4 ; j++){
 				
-				if(valueArray[mainClass.guessVector.elementAt(i)[j] ]  > 0){
+				if(valueArray[correctAnswer[j]]  > 0){
 					if(mainClass.guessVector.elementAt(i)[j] == correctAnswer[j]){
 						RightPlaceAndValue++;
 					}
@@ -33,7 +33,7 @@ public class GuessEliminator extends Thread {
 						RightValue++;
 					}
 					
-					valueArray[mainClass.guessVector.elementAt(i)[j]]--;
+					valueArray[correctAnswer[j]]--;
 				}
 			}
 			if(mainClass.guessResult.elementAt(i)[0] != RightPlaceAndValue || mainClass.guessResult.elementAt(i)[1] != RightValue){
