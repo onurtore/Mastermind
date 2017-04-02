@@ -12,17 +12,38 @@ public class mainClass {
 	static int[] myGuess = new int[4];
 	static int[] valueArray = new int[10];
 	static int[] positionArray = new int[10];
-	
+	String outputString;
 	static int[] oldGuess;
 	static int guessW = 0;
 	static int guessC = 0;
 	
+	static int guessCounter = 0;
+	static int tryCounter = 0;
+	static boolean eliminationDone = false;
+	
 	static  Vector<int[]> guessVector = new Vector<int[]>();
 	static 	Vector<int[]> guessResult = new Vector<int[]>();
+	static long startTime = System.currentTimeMillis();
 	
-	public static void main(String[] args) {
-			
-
+	public static  void  main(String args[]) {
+		
+		
+		//mainClass.correctAnswer[0] = 9;
+		//mainClass.correctAnswer[1] = 9;
+		//mainClass.correctAnswer[2] = 8;
+		//mainClass.correctAnswer[3] = 9;
+		
+		System.out.print("Right Answer is: ");
+		
+		//For GUI
+		//outputString = "<html>Right Answer is: ";
+		
+		for(int i = 0;  i < 4 ; i++){
+			System.out.print(correctAnswer[i]);
+			//For GUI
+			//outputString += correctAnswer[i];
+		}
+		
 		while(true){
 
 			
@@ -34,7 +55,9 @@ public class mainClass {
 				myGuess[3] = 2;
 				myPA.array1[1122][0] = -1;
 			}
-	/*			System.out.println("\n\n");
+			
+	/*	Testing Purposes	
+	 * 	System.out.println("\n\n");
 				for(int i = 0; i < guessVector.size(); i++){
 					for(int j = 0; j < 4 ; j++){
 						System.out.print(guessVector.elementAt(i)[j]);
@@ -55,20 +78,24 @@ public class mainClass {
 			int [] numbersClone = (int[])myGuess.clone();
 			guessVector.addElement(numbersClone);//Add old guesses to this vector 
 			
+			//Testing Purposes
+			//System.out.print("Right Answer is: ");
 			
-			System.out.print("Right Answer is: ");
-			
-			for(int i = 0;  i < 4 ; i++){
-				System.out.print(correctAnswer[i]);
-			}
+			//for(int i = 0;  i < 4 ; i++){
+			//	System.out.print(correctAnswer[i]);
+			//}
 			
 			System.out.println();
+			//For GUI
+			//outputString += "<br> My Guess is ";
 			System.out.print("My Guess is: ");
 			for(int i = 0;  i < 4 ; i++){
 				System.out.print(myGuess[i]);
+				//For GUI
+				//outputString += myGuess[i];
 			}
 			
-			System.out.println();
+			//System.out.println();
 			
 			int [] guessArray  = getResult(myGuess);
 		
@@ -79,12 +106,19 @@ public class mainClass {
 			int [] numbersClone2 = (int[])guessArray.clone();
 			guessResult.addElement(numbersClone2);
 			
-			System.out.println("GuessC is: " + guessC + " GuessW is:" + guessW);
+			//System.out.println("GuessC is: " + guessC + " GuessW is:" + guessW);
+			
+			guessCounter++;
 			
 			if(guessC == 4){
+				//For GUI
+				//outputString += "<br>Found in " + guessCounter +" guess in " + tryCounter +" tries.</html>";
+				System.out.println("\nFound in " + guessCounter +" guess in " + tryCounter +" tries.");
+				//Testing Purposes
+				//System.out.println(outputString);
 				return;
 			}
-			
+				
 				
 			
 			eliminator();
@@ -123,18 +157,44 @@ public class mainClass {
 		eliminate1.start();
 		eliminate2.start();
 	
-	
+		
+		/*Neden Çalýþmýyor bak
+		while(true){
+			if(eliminationDone){
+				if(eliminate1.isAlive()){
+					eliminate1.interrupt();
+				}
+				if(eliminate2.isAlive()){
+					eliminate2.interrupt();
+				}
+				break;
+			}
+		System.out.println(eliminationDone);
+		}*/
+		
+
 		try {
+
 			eliminate1.join();
+
 		} catch (InterruptedException e) {
+
 			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+
 		}
+
 		try {
+
 			eliminate2.join();
+
 		} catch (InterruptedException e) {
+
 			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+
 		}
 		
 	}
