@@ -7,7 +7,7 @@ public class mainClass {
 	static boolean result = false;	
 	static boolean firstTry = true;
 	static RandomNumberGenerator myRNG	= new RandomNumberGenerator();
-	static int[] correctAnswer = myRNG.getCorrectAnswer();
+	static int[] correctAnswer = new int[4];
 	final static PossiblyArrays myPA	= new PossiblyArrays();
 	static int[] myGuess = new int[4];
 	static int[] valueArray = new int[10];
@@ -25,23 +25,30 @@ public class mainClass {
 	static 	Vector<int[]> guessResult = new Vector<int[]>();
 	static long startTime = System.currentTimeMillis();
 	
-	public static  void  main(String args[]) {
+	mainClass(int[] userInput){
+		
+		correctAnswer[0] = userInput[0];
+		correctAnswer[1] = userInput[1];
+		correctAnswer[2] = userInput[2];
+		correctAnswer[3] = userInput[3];
+		
+	}
+	
+	
+	
+	public   void  startGame() {
 		
 		
-		//mainClass.correctAnswer[0] = 9;
-		//mainClass.correctAnswer[1] = 9;
-		//mainClass.correctAnswer[2] = 8;
-		//mainClass.correctAnswer[3] = 9;
 		
-		System.out.print("Right Answer is: ");
+		//System.out.print("Right Answer is: ");
 		
 		//For GUI
-		//outputString = "<html>Right Answer is: ";
+		outputString = "<html>Right Answer is: ";
 		
 		for(int i = 0;  i < 4 ; i++){
-			System.out.print(correctAnswer[i]);
+			//System.out.print(correctAnswer[i]);
 			//For GUI
-			//outputString += correctAnswer[i];
+			outputString += correctAnswer[i];
 		}
 		
 		while(true){
@@ -55,44 +62,20 @@ public class mainClass {
 				myGuess[3] = 2;
 				myPA.array1[1122][0] = -1;
 			}
-			
-	/*	Testing Purposes	
-	 * 	System.out.println("\n\n");
-				for(int i = 0; i < guessVector.size(); i++){
-					for(int j = 0; j < 4 ; j++){
-						System.out.print(guessVector.elementAt(i)[j]);
-					}
-					System.out.println();
-				
-				}
-				System.out.println("\n\n");
-				for(int i = 0; i < guessResult.size(); i++){
-					for(int j = 0; j <2 ; j++){
-						System.out.print(guessResult.elementAt(i)[j]);
-					}
-					System.out.println();
-				
-				}
-	*/	
-			
 			int [] numbersClone = (int[])myGuess.clone();
 			guessVector.addElement(numbersClone);//Add old guesses to this vector 
 			
-			//Testing Purposes
-			//System.out.print("Right Answer is: ");
 			
-			//for(int i = 0;  i < 4 ; i++){
-			//	System.out.print(correctAnswer[i]);
-			//}
+			//System.out.println();
 			
-			System.out.println();
 			//For GUI
-			//outputString += "<br> My Guess is ";
-			System.out.print("My Guess is: ");
+			outputString += "<br> My Guess is ";
+			
+			//System.out.print("My Guess is: ");
 			for(int i = 0;  i < 4 ; i++){
-				System.out.print(myGuess[i]);
+			//	System.out.print(myGuess[i]);
 				//For GUI
-				//outputString += myGuess[i];
+				outputString += myGuess[i];
 			}
 			
 			//System.out.println();
@@ -106,16 +89,13 @@ public class mainClass {
 			int [] numbersClone2 = (int[])guessArray.clone();
 			guessResult.addElement(numbersClone2);
 			
-			//System.out.println("GuessC is: " + guessC + " GuessW is:" + guessW);
 			
 			guessCounter++;
 			
 			if(guessC == 4){
 				//For GUI
-				//outputString += "<br>Found in " + guessCounter +" guess in " + tryCounter +" tries.</html>";
-				System.out.println("\nFound in " + guessCounter +" guess in " + tryCounter +" tries.");
-				//Testing Purposes
-				//System.out.println(outputString);
+				outputString += "<br>Found in " + guessCounter +" guess in " + tryCounter +" tries.</html>";
+				//System.out.println("\nFound in " + guessCounter +" guess in " + tryCounter +" tries.");
 				return;
 			}
 				
@@ -153,12 +133,11 @@ public class mainClass {
 		GuessEliminator eliminate2 = new GuessEliminator(myPA.array2);
 
 		GuessEliminator.isFinish = false;
-	
+		eliminationDone = false;
 		eliminate1.start();
 		eliminate2.start();
 	
-		
-		/*Neden Çalýþmýyor bak
+		/*
 		while(true){
 			if(eliminationDone){
 				if(eliminate1.isAlive()){

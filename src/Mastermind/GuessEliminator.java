@@ -59,8 +59,7 @@ public class GuessEliminator extends Thread {
 					return;
 
 				}	
-				/*Neden çalýþmýyor bak
-				 * if(Thread.currentThread().isInterrupted()){
+				/* if(Thread.currentThread().isInterrupted()){
 					return;
 				}*/
 				if(myArray[i][0] != -1 ){
@@ -69,6 +68,7 @@ public class GuessEliminator extends Thread {
 							myArray[i][0] = -1;
 						}
 						else{
+							mainClass.eliminationDone = true;
 							isFinish = true;	
 							//Deep Copy
 							System.arraycopy(myArray[i],0,mainClass.myGuess,0,mainClass.myGuess.length);
