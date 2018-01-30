@@ -1,4 +1,4 @@
 # Mastermind
 # Explanation
 
-Simple Mastermind game simulation with thread solution,for Software Development Methodologies course main purpose was learn thread concept.
+Simple Mastermind game simulation&solution via threads,developed for Software Development Methodologies course,purpose was the learning the thread concept.
